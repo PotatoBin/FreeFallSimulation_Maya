@@ -35,4 +35,4 @@ freeFall ()
 
 
 for i in range (239):
-    cmds.setKeyframe('all_CON.translateY', value=posY[i], time=i+1)
+    cmds.setKeyframe('-----YourObject-----.translateY', value=posY[i], time=i+1)
