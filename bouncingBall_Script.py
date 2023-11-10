@@ -1,10 +1,11 @@
 import maya.cmds as cmds
 
-initial_height = 3 #m
-initial_velocity = -5.0 #m/s
-gravity = 9.806 #m/s^2
+initial_height = 1
+initial_velocity = 0
+gravity = 9.806
 restitution_coefficient = 0.8
 fps = 24
+bouncing = 10
 posY = []
 
 def freeFall () :
@@ -18,8 +19,8 @@ def freeFall () :
         time += 1/fps
     return verticalUpward (current_velocity, 1)
 
-def verticalUpward (current_velocity, bounced):
-    if (bounced >= 10) : return
+def verticalUpward (current_velocity, bouncing):
+    if (bouncing >= 10) : return
     time = 0
     current_height = 0
     initial_velocity = -1 * current_velocity * restitution_coefficient
@@ -29,10 +30,9 @@ def verticalUpward (current_velocity, bounced):
         current_height = initial_velocity * time - 0.5 * gravity * time * time
         current_velocity = initial_velocity - gravity * time
         time += 1/fps
-    return verticalUpward(current_velocity, bounced+1)
+    return verticalUpward(current_velocity, bouncing+1)
 
 freeFall ()
 
-
-for i in range (239):
-    cmds.setKeyframe('-----YourObject-----.translateY', value=posY[i], time=i+1)
+for i in range (len(posY)):
+    cmds.setKeyframe('all_CON.translateY', value=posY[i], time=i)
